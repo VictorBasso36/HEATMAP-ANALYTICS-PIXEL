@@ -72,6 +72,7 @@ async function sendDataToEndpoint() {
         }));
 
         http.send(JSON.stringify(dataWithDomainAndIp));
+        console.log(JSON.stringify(dataWithDomainAndIp))
         dataBuffer = []; //Clean buffer
     }
 }
