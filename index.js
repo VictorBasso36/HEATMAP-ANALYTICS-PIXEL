@@ -47,15 +47,31 @@ function handleTouchEnd(event) {
     });
 }
 
-function sendDataToEndpoint() {
+async function sendDataToEndpoint() {
     console.log("sendDataToEndpoint")
     if (dataBuffer.length > 0) {
         console.log(dataBuffer);
-        var endpoint = 'YOUR_ENDPOINT_URL'; 
+        var endpoint = 'https://heat-map-analytics-api.vercel.app/api/v1/heatmaps'; 
         var http = new XMLHttpRequest();
         http.open('POST', endpoint, true);
         http.setRequestHeader('Content-type', 'application/json');
-        http.send(JSON.stringify(dataBuffer));
+
+
+        var domain = document.title;
+
+   
+        var ipResponse = await fetch('https://api.ipify.org?format=json');
+        var ipData = await ipResponse.json();
+        var ip = ipData.ip;
+
+       
+        var dataWithDomainAndIp = dataBuffer.map(dataPoint => ({
+            ...dataPoint,
+            domain: domain,
+            ip: ip
+        }));
+
+        http.send(JSON.stringify(dataWithDomainAndIp));
         dataBuffer = []; //Clean buffer
     }
 }
