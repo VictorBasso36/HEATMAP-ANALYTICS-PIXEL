@@ -3,7 +3,6 @@ var dataBuffer = []; //buffer
 var sendDataInterval = 5000;
 
 function handleMouseMove(event) {
-    console.log("handleMouseMove")
     dataBuffer.push({
         x: event.clientX,
         y: event.clientY,
@@ -12,7 +11,6 @@ function handleMouseMove(event) {
 }
 
 function handleClick(event) {
-    console.log("handleClick")
     dataBuffer.push({
         x: event.clientX,
         y: event.clientY,
@@ -21,7 +19,6 @@ function handleClick(event) {
 }
 
 function handleTouchStart(event) {
-    console.log("handleTouchStart")
     dataBuffer.push({
         x: event.touches[0].clientX,
         y: event.touches[0].clientY,
@@ -30,7 +27,6 @@ function handleTouchStart(event) {
 }
 
 function handleTouchMove(event) {
-    console.log("handleTouchMove")
     dataBuffer.push({
         x: event.touches[0].clientX,
         y: event.touches[0].clientY,
@@ -79,7 +75,7 @@ async function sendDataToEndpoint() {
 
 window.onload = function() {
     containerRef = document.body;
-    console.log('funcinou !')
+    console.log('heatmap has been initialized 🔥')
     containerRef.addEventListener('mousemove', handleMouseMove);
     containerRef.addEventListener('click', handleClick);
     containerRef.addEventListener('touchstart', handleTouchStart);
